@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Voucher Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <h1>Travel Voucher Generator</h1>
+            <p class="app-description">Upload your Excel file to generate professional travel vouchers</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section id="upload-section" class="upload-section">
+                <div class="upload-area" id="upload-area">
+                    <div class="upload-content">
+                        <div class="upload-icon">📄</div>
+                        <h3>Drop your Excel file here</h3>
+                        <p>Or click to browse files</p>
+                        <button class="btn btn--primary btn--lg" id="file-select-btn">Select File</button>
+                        <input type="file" id="file-input" accept=".xlsx,.xls" hidden>
+                        <p class="file-info">Supports .xlsx and .xls files only</p>
+                    </div>
+                </div>
+                <div id="file-status" class="file-status hidden"></div>
+                
+                <!-- Demo button for testing -->
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn btn--secondary" id="demo-btn">Show Demo Preview</button>
+                </div>
+            </section>
+
+            <!-- Processing Section -->
+            <section id="processing-section" class="processing-section hidden">
+                <div class="processing-content">
+                    <div class="processing-spinner"></div>
+                    <h3>Processing your file...</h3>
+                    <p>Generating travel voucher document</p>
+                </div>
+            </section>
+
+            <!-- Preview Section -->
+            <section id="preview-section" class="preview-section hidden">
+                <div class="preview-header">
+                    <h2>Voucher Preview</h2>
+                    <div class="preview-actions">
+                        <button class="btn btn--primary" id="download-btn">Download as Word Document</button>
+                        <button class="btn btn--secondary" id="print-btn">Print/Save as PDF</button>
+                        <button class="btn btn--outline" id="new-file-btn">Upload Another</button>
+                    </div>
+                </div>
+                <div class="voucher-preview" id="voucher-preview">
+                    <!-- Generated voucher content will be inserted here -->
+                </div>
+            </section>
+
+            <!-- Error Section -->
+            <section id="error-section" class="error-section hidden">
+                <div class="error-content">
+                    <div class="error-icon">❌</div>
+                    <h3>Error Processing File</h3>
+                    <p id="error-message">An error occurred while processing your file.</p>
+                    <button class="btn btn--secondary" id="retry-btn">Try Again</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Modal for Excursion Type Selection -->
+        <div class="modal hidden" id="excursion-modal">
+            <div class="modal-content">
+                <h3>Classification Required</h3>
+                <p>Could not automatically determine excursion type for:</p>
+                <p id="excursion-text" class="excursion-text"></p>
+                <div class="excursion-options">
+                    <button class="btn btn--secondary excursion-option" data-type="transfer">Transfer</button>
+                    <button class="btn btn--secondary excursion-option" data-type="city tour">City Tour</button>
+                    <button class="btn btn--secondary excursion-option" data-type="priv-tour">Private Tour</button>
+                    <button class="btn btn--secondary excursion-option" data-type="safari">Safari</button>
+                    <button class="btn btn--secondary excursion-option" data-type="group/tix">Group/Tickets</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="app-footer">
+            <p>&copy; 2025 Travel Voucher Generator. Built for Scandinavia Travel.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
